@@ -16,8 +16,9 @@ module MakeWatchable
       # Thus we should also search for the baseclass when querying
       def sti_base_class
         return @sti_base_class unless @sti_base_class.nil?
-        klass = self.class
-        self.class.ancestors.each do |k|
+
+        klass = self
+        self.ancestors.each do |k|
           break if k == ActiveRecord::Base # we reached the bottom of this barrel
           klass = k if k.is_a? Class
         end
